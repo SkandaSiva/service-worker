@@ -38,11 +38,16 @@ $stmt->bind_param("sss",
 
 if ($stmt->execute()) {
 
-    echo "Signup Succesful";
+    header("Location: success.html");
+    exit;
     
-}
-else {
-    die($mysqli->error . " " . $mysqli->errno);
+} else {
+    
+    if ($mysqli->errno === 1062) {
+        die("email already taken");
+    } else {
+        die($mysqli->error . " " . $mysqli->errno);
+    }
 } 
 
 var_dump($password_hash);
