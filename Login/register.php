@@ -19,6 +19,9 @@ if ( ! preg_match("/[0-9]/", $_POST["password"])) {
 
 $password_hash = password_hash($_POST["password"], PASSWORD_DEFAULT);
 
+
+$mysqli = require __DIR__ . "/database.php";
+
 var_dump($password_hash);
 print_r($_POST);
 ?>
