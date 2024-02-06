@@ -2,7 +2,7 @@
 
 $host = "localhost";
 $dbname = "login_db";
-$username = "debian-sys-maint";
+$username = "maint";
 $password = "t3cnpiojzprmIFPy";
 
 $mysqli = new mysqli(hostname: $host,
@@ -14,5 +14,6 @@ if ($mysqli->connect_errno) {
     die("Connection error: " . $mysqli->connect_error);
 }
 
-$mysqli = require __DIR__ . "/database.php";
 return $mysqli;
+
+?>
