@@ -32,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["name"])) {
             header("Location: success-2.html");
             exit;
         }
-    }
+     }
     
     $is_invalid = true;
 }
