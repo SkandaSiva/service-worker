@@ -2,7 +2,7 @@
 
 Service workers are an essential component of Progressive Web Applications(PWA). They support offline loading, background code execution, and push notifications.
 
-<img width="500" alt="sw-architecture" src="https://github.com/SkandaSiva/service-worker/assets/54946169/ad10f7c7-7d78-462d-8bb2-0b44004bb5b1 style="border: 2px solid  gray;">
+<img width="500" alt="sw-architecture" src="https://github.com/SkandaSiva/service-worker/assets/54946169/ad10f7c7-7d78-462d-8bb2-0b44004bb5b1 style="border: 2px solid  gray">
 
 Sensitive functions in Javascript are often used maliciously to perform actions with an undesirable outcome. 
 
