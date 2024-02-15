@@ -1,0 +1,12 @@
+{
+  "name": "service-worker",
+  "version": "1.0.0",
+  "description": "<<<<<<< HEAD Service worker scripts for sensitive functions\r ======= # Service Workers and Sensitive Functions",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
