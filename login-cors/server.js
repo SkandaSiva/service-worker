@@ -14,10 +14,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Require login and register routers
 const loginRouter = require('./public/login');
 const registerRouter = require('./public/register');
+const logoutRouter = require('./public/logout');
 
 // Use login and register routes
 app.use('/login', loginRouter);
 app.use('/register', registerRouter);
+app.use('/logout', logoutRouter);
 
 // Start the server
 app.listen(PORT, () => {
