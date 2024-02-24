@@ -35,14 +35,14 @@ const APP = {
 
   requestAndSetBackground() {
     // Replace 'https://example.com/path/to/your/image.jpg' with the actual URL of the image
-    const imageUrl = 'https://example.com/path/to/your/image.jpg';
+    const imageUrl = 'https://rapidly-vast-pipefish.ngrok-free.app/image_processing20210107-6784-v6bh0c.png';
 
     // Fetch the image using CORS headers
     fetch(imageUrl, {
       method: 'GET',
       mode: 'cors', // Use CORS mode
       headers: {
-        'Content-Type': 'image/jpeg', // Adjust the content type based on your image format
+        'Content-Type': 'image/png', // Adjust the content type based on your image format
       },
     })
       .then((response) => {
