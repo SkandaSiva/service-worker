@@ -1,5 +1,3 @@
-// app.js
-
 const APP = {
   SW: null,
   init() {
@@ -31,16 +29,22 @@ const APP = {
       console.log('Service workers are not supported.');
     }
 
-    // Request the image and set it as the background
+    // Use arrow function to preserve the context
     this.requestAndSetBackground();
   },
 
   requestAndSetBackground() {
-    // Replace 'http://websitelogin.com/path/to/your/image.jpg' with the actual URL of the image
-    const imageUrl = 'https://rapidly-vast-pipefish.ngrok-free.app/image_processing20210107-6784-v6bh0c.png';
+    // Replace 'https://example.com/path/to/your/image.jpg' with the actual URL of the image
+    const imageUrl = 'https://example.com/path/to/your/image.jpg';
 
-    // Fetch the image
-    fetch(imageUrl)
+    // Fetch the image using CORS headers
+    fetch(imageUrl, {
+      method: 'GET',
+      mode: 'cors', // Use CORS mode
+      headers: {
+        'Content-Type': 'image/jpeg', // Adjust the content type based on your image format
+      },
+    })
       .then((response) => {
         if (response.ok) {
           // Convert the response to a blob
@@ -55,7 +59,7 @@ const APP = {
       })
       .then((dataUrl) => {
         // Set the background using the data URL
-        document.body.style.backgroundImage = `url('${dataUrl}')`;
+        document.body.style.backgroundImage = url('${dataUrl}');
       })
       .catch((error) => {
         console.error('Error:', error);
@@ -63,4 +67,4 @@ const APP = {
   },
 };
 
-document.addEventListener('DOMContentLoaded', () => APP.init()); // Use arrow function here
+document.addEventListener('DOMContentLoaded', () => APP.init());
