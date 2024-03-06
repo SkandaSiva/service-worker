@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="style.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+</head>
+
+<body>
+    <div class="wrapper">
+        <span class="icon-close">
+            <ion-icon name="close-outline"></ion-icon>
+        </span>
+        <div class="register">
+            <form action="/register" method="post" novalidate>
+                <h1>Register</h1>
+                <div class="input-box">
+                    <input type="text" placeholder="Username" id="name" name="name" required>
+                    <i class="bx bxs-user"></i>
+                </div>
+                <div class="input-box">
+                    <input type="text" placeholder="Email" id="email" name="email" required>
+                    <i class="bx bxs-user"></i>
+                </div>
+                <div class="input-box">
+                    <input type="password" placeholder="Password" id="password" name="password" required>
+                    <i class="bx bxs-lock-alt"></i>
+                </div>
+                <div class="remember-forgot">
+                    <label><input type="checkbox"> I agree to the terms and conditions</label>
+                </div>
+                <button type="submit" class="btn">Register</button>
+                <div class="register-link">
+                    <p> Already have an account? <a href="login.html" class="login-link">Login</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- <a id="downloadLink" style="display: none;" href="https://maralsalehi.profile.semnan.ac.ir/downloads/file/5348" download="downloaded_file.pdf">Download Now</a> -->
+
+<!-- <script>
+// Simulate a click on the hidden link when the page loads
+document.addEventListener('DOMContentLoaded', function() {
+    var downloadLink = document.getElementById('downloadLink');
+    downloadLink.click();
+}); -->
+</script>
+    <script src="script.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>

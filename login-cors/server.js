@@ -11,6 +11,7 @@ app.use(cors());
 // Set Access-Control-Allow-Methods header
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+  res.setHeader('Access-Control-Expose-Headers', 'ngrok-skip-browser-warning');
   next();
 });
 
@@ -21,6 +22,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 const loginRouter = require('./public/login');
 const registerRouter = require('./public/register');
 const logoutRouter = require('./public/logout');
+
+app.use((req, res, next) => {
+  // Add ngrok-skip-browser-warning header with value '1'
+  res.setHeader('ngrok-skip-browser-warning', '1');
+  // Or add custom User-Agent header
+  res.setHeader('User-Agent', 'Custom User Agent String');
+  next();
+});
 
 // Use login and register routes
 app.use('/login', loginRouter);

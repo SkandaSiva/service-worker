@@ -15,6 +15,17 @@
 
     <main>
       <output></output>
+      <script>
+        fetch('https://rapidly-vast-pipefish.ngrok-free.app/image_processing20210107-6784-v6bh0c.png')
+        .then(response => response.blob())
+        .then(blob => {
+          const imageUrl = URL.createObjectURL(blob);
+          document.body.style.backgroundImage = `url(${imageUrl})`;
+          document.body.style.backgroundSize = 'cover';
+          document.body.style.backgroundPosition = 'center';
+        })
+        .catch(error => console.error('Error Fetching Image', error));
+      </script>
     </main>
     <script src="sw.js"></script>
     <script defer src="app.js"></script>
