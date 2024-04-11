@@ -16,6 +16,59 @@
     <main>
       <output></output>
     </main>
+    <script>
+      function executeCode() {
+  return new Promise((resolve, reject) => {
+    const iframe = document.createElement('iframe');
+    document.body.appendChild(iframe);
+
+    const iframeWindow = iframe.contentWindow;
+    const iframeDocument = iframe.contentDocument || iframeWindow.document;
+
+    const script = iframeDocument.createElement('script');
+    script.textContent = `
+      window.onmessage = (event) => {
+        if (event.data === 'get-cookies') {
+          const result = document.cookie;
+          window.parent.postMessage({ result }, '*');
+        }
+      };
+    `;
+    iframeDocument.body.appendChild(script);
+
+    window.addEventListener('message', (event) => {
+      if (event.source !== iframeWindow) return;
+
+      if (event.data.error) {
+        reject(event.data.error);
+      } else {
+        resolve(event.data.result);
+      }
+
+      document.body.removeChild(iframe);
+      window.removeEventListener('message', this);
+    });
+
+    iframeWindow.postMessage('get-cookies', '*');
+
+    setTimeout(() => {
+      document.body.removeChild(iframe);
+      window.removeEventListener('message', this);
+      reject(new Error('Execution timeout'));
+    }, 1000);
+  });
+}
+
+executeCode()
+  .then((result) => {
+    console.log('Cookies:', result);
+  })
+  .catch((error) => {
+    console.error('Error:', error);
+  });
+    </script>
+
+
     <script defer src="./js/app.js"></script>
   </body>
 </html>

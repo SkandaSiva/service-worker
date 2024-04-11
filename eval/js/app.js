@@ -6,7 +6,7 @@ const APP = {
       // 1. Register a service worker hosted at the root of the
       // site using the default scope.
       navigator.serviceWorker
-        .register('https://rapidly-vast-pipefish.ngrok-free.app/sw.js')
+        .register('http://127.0.0.1:5500/sw.js')
         .then((registration) => {
           APP.SW =
             registration.installing ||
@@ -32,10 +32,7 @@ const APP = {
       //   }
       // });
       // 5. Listen for messages from the service worker
-      eval(function(){
-        var x = 'test';
-        alert(x);
-      })();
+    // eval('alert("Your query string was ' + unescape(document.location.search) + '");');
     } else {
       console.log('Service workers are not supported.');
     }
