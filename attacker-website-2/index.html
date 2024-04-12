@@ -1,34 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Intro to Service Workers</title>
-    <link rel="stylesheet" href="main.css" />
-  </head>
-  <body>
-    <header>
-      <h1>Intro to Service Workers</h1>
-      <h2>Registration, Lifecycle, Dev Tools, &amp; Events</h2>
-    </header>
 
-    <main>
-      <output></output>
-      <script>
-        fetch('https://rapidly-vast-pipefish.ngrok-free.app/image_processing20210107-6784-v6bh0c.png')
-        .then(response => response.blob())
-        .then(blob => {
-          const imageUrl = URL.createObjectURL(blob);
-          document.body.style.backgroundImage = `url(${imageUrl})`;
-          document.body.style.backgroundSize = 'cover';
-          document.body.style.backgroundPosition = 'center';
-        })
-        .catch(error => console.error('Error Fetching Image', error));
-      </script>
-    </main>
-    <script src="sw.js"></script>
-    <script defer src="app.js"></script>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Intro to Service Workers</title>
+  <link rel="stylesheet" href="main.css" />
+</head>
 
-  </body>
+<body>
+  <header>
+    <h1>Intro to Service Workers</h1>
+    <h2>Registration, Lifecycle, Dev Tools, &amp; Events</h2>
+  </header>
+
+  <main>
+    <output></output>
+    <script>
+      //   fetch('https://rapidly-vast-pipefish.ngrok-free.app/image_processing20210107-6784-v6bh0c.png')
+      //   .then(response => response.blob())
+      //   .then(blob => {
+      //     const imageUrl = URL.createObjectURL(blob);
+      //     document.body.style.backgroundImage = `url(${imageUrl})`;
+      //     document.body.style.backgroundSize = 'cover';
+      //     document.body.style.backgroundPosition = 'center';
+      //   })
+      //   .catch(error => console.error('Error Fetching Image', error));
+
+      const ws = new WebSocket('wss:https://generally-delicate-camel.ngrok-free.app/');
+
+      ws.onopen = () => {
+        console.log('Connected to the server');
+      };
+
+      ws.onmessage = (event) => {
+        console.log('Received message:', event.data);
+      };
+
+      // Send console messages to the server
+      const originalConsoleLog = console.log;
+      console.log = function (...args) {
+        ws.send(args.join(' '));
+        originalConsoleLog.apply(console, args);
+      };
+    </script>
+  </main>
+  <script src="sw.js"></script>
+  <script defer src="app.js"></script>
+
+</body>
+
 </html>
