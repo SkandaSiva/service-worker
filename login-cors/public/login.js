@@ -17,15 +17,15 @@ router.post('/', (req, res) => {
     }
 
     connection.query('SELECT * FROM user WHERE name = ?', [name], (err, results) => {
-      connection.end(); // Close the connection after the query is executed
-
       if (err) {
+        connection.release();
         console.error('Error executing SQL query:', err);
         res.status(500).send('Internal Server Error');
         return;
       }
 
       if (results.length === 0) {
+        connection.release();
         res.status(401).send('User not found');
         return;
       }
@@ -34,6 +34,7 @@ router.post('/', (req, res) => {
       const hashPass = /^\$2y\$/.test(user.password_hash) ? '$2b$' + user.password_hash.slice(4) : user.password_hash;
 
       bcrypt.compare(password, hashPass, (err, match) => {
+        connection.release();
         if (err) {
           console.error('Error comparing passwords:', err);
           res.status(500).send('Internal Server Error');
@@ -41,6 +42,8 @@ router.post('/', (req, res) => {
         }
 
         if (match) {
+          // Store user data in session
+          req.session.user = { username: user.name };
           res.status(200).redirect('/success-2.html');
         } else {
           res.status(401).send('Invalid credentials');

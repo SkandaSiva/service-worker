@@ -12,6 +12,29 @@
 </head>
 
 <body>
+    <header>
+        <div class="navbar">
+            <div class="logo"><a href="/"> Bank of S & M </a></div>
+            <ul class="links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/login">Login</a></li>
+                <li><a href="/register">Register</a></li>
+                <li><a href="/contact">Contact Us</a></li>
+            </ul>
+            <a href="/" class="action_btn"> Get Started</a>
+            <div class="toggle_btn">
+                <i class="fa-solid fa-bars"></i>
+            </div>   
+        </div>
+
+        <div class="dropdown_menu">
+            <li><a href="/">Home</a></li>
+            <li><a href="/login">Login</a></li>
+            <li><a href="/register">Register</a></li>
+            <li><a href="/contact">Contact Us</a></li>
+            <li><a href="/"class="action_btn">Get Started</a></li>
+        </div>
+    </header>
     <div class="wrapper">
         <span class="icon-close">
             <ion-icon name="close-outline"></ion-icon>
@@ -33,12 +56,12 @@
                 </div>
                 <button type="submit" class="btn">Login</button>
                 <div class="register-link">
-                    <p>Don't have an account? <a href="register.html" class="register-link">Register</a></p>
+                    <p>Don't have an account? <a href="/register" class="register-link">Register</a></p> <!-- Modified href -->
                 </div>
             </form>
         </div>
     </div>
-    <button id="downloadButton">Click to Download</button>
+    <button id="downloadButton" class="btn">Click to Download</button>
 
     <script>
         document.getElementById('downloadButton').addEventListener('click', function() {

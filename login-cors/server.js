@@ -1,8 +1,13 @@
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
+const session = require('express-session');
+const loginRouter = require('./public/login');
+const logoutRouter = require('./public/logout');
+const registerRouter = require('./public/register');
 
 const app = express();
+const router = express.Router();
 const PORT = process.env.PORT || 3000;
 
 // Enable CORS for all routes and specify allowed methods
@@ -18,23 +23,44 @@ app.use((req, res, next) => {
 // Serve static files from the public directory
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Require login and register routers
-const loginRouter = require('./public/login');
-const registerRouter = require('./public/register');
-const logoutRouter = require('./public/logout');
+// Configure session middleware
+app.use(session({
+  secret: 'p@ssw0rd',
+  resave: false,
+  saveUninitialized: true,
+  cookie: {
+    maxAge: 30 * 24 * 60 * 60 * 1000,
+    sameSite: true,
+    secure: false
+    // secure: process.env.Node_ENV == 'production'
+  }
+}));
 
-app.use((req, res, next) => {
-  // Add ngrok-skip-browser-warning header with value '1'
-  res.setHeader('ngrok-skip-browser-warning', '1');
-  // Or add custom User-Agent header
-  res.setHeader('User-Agent', 'Custom User Agent String');
-  next();
+// Redirect /public/login.html to /login
+app.get('/public/login.html', (req, res) => {
+  res.redirect('/login');
 });
 
-// Use login and register routes
+// Define routes
+router.get("/", (req, res) => {
+  res.sendFile("index.html", {root: "./public"});
+});
+
+router.get("/register", (req, res) => {
+  res.sendFile("register.html", {root: "./public"});
+});
+
+router.get("/login", (req, res) => {
+  res.sendFile("login.html", {root: "./public"});
+});
+
+// Handle login form submission
 app.use('/login', loginRouter);
-app.use('/register', registerRouter);
 app.use('/logout', logoutRouter);
+app.use('/register', registerRouter)
+
+// Use router middleware
+app.use('/', router);
 
 // Start the server
 app.listen(PORT, () => {
